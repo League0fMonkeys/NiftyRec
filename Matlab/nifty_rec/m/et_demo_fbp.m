@@ -14,7 +14,7 @@
 %% Parameters
 N              = 128;
 N_projections  = 120;
-cameras        = linspace(0,2*pi,N_cameras)';
+cameras        = linspace(0,2*pi,N_projections)';
 psf            = ones(5,5,N);
 N_counts       = 50e6;
 
