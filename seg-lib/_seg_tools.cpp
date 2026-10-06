@@ -253,9 +253,9 @@ int seg_convert2binary_data(nifti_image *image,
 int Normalize_NaN_Priors(nifti_image * Priors,
                          bool verbose)
 {
-    register int numel = Priors->nx*Priors->ny*Priors->nz;
-    register int ups=0;
-    register int good=0;
+    int numel = Priors->nx*Priors->ny*Priors->nz;
+    int ups=0;
+    int good=0;
     if(verbose>0){
         cout<< "Normalizing Priors" << endl;
     }
@@ -325,9 +325,9 @@ int Normalize_NaN_Priors_mask(nifti_image * Priors,
                               nifti_image * Mask,
                               bool verbose)
 {
-    register int numel = Mask->nvox;
-    register int ups=0;
-    register int good=0;
+    int numel = Mask->nvox;
+    int ups=0;
+    int good=0;
     if(verbose>0){
         cout<< "Normalizing Priors" << endl;
     }
@@ -647,8 +647,8 @@ SegPrecisionTYPE * Create_cArray_from_Prior_mask(nifti_image * Mask,
                                               int numclass,
                                               bool PV_ON)
 {
-    register int numel=(int)(rowsize(Mask)*colsize(Mask)*depth(Mask));
-    register int numel_masked=0;
+    int numel=(int)(rowsize(Mask)*colsize(Mask)*depth(Mask));
+    int numel_masked=0;
 
     bool * Maskptrtmp = static_cast<bool *> (Mask->data);;
     for (int i=0; i<numel; i++, Maskptrtmp++) {
@@ -676,7 +676,7 @@ SegPrecisionTYPE * Create_cArray_from_Prior(nifti_image * Priors,
                                          int numclass,
                                          bool PV_ON)
 {
-    register int numel=(int)(rowsize(Priors)*colsize(Priors)*depth(Priors));
+    int numel=(int)(rowsize(Priors)*colsize(Priors)*depth(Priors));
     int pluspv=(int)(PV_ON)*2;
     SegPrecisionTYPE * Expec = new SegPrecisionTYPE [numel*(numclass+pluspv)] ();
     SegPrecisionTYPE * Expec_PTR= Expec;
@@ -692,8 +692,8 @@ SegPrecisionTYPE * Create_cArray_from_Prior(nifti_image * Priors,
 SegPrecisionTYPE * Create_cArray_from_3D_image(nifti_image * Mask,
                                             nifti_image * SourceImage)
 {
-    register int numel=(int)(rowsize(Mask)*colsize(Mask)*depth(Mask));
-    register int numel_masked=0;
+    int numel=(int)(rowsize(Mask)*colsize(Mask)*depth(Mask));
+    int numel_masked=0;
 
     bool * Maskptrtmp = static_cast<bool *> (Mask->data);;
     for (int i=0; i<numel; i++, Maskptrtmp++) {
@@ -1095,7 +1095,7 @@ int calcE_mask_aprox(nifti_image * T1,
     loglik[0]=0;
     SumExpec=0.0f;
     //int * Expec_offset_PTR= (int *) Expec_offset;
-    register SegPrecisionTYPE tempvar=0.0f;
+    SegPrecisionTYPE tempvar=0.0f;
     float mahal=0.0f;
     float logliktmp=0.0f;
     for (int i=0; i<numel_masked;i++, Expec_PTR++, IterPrior_PTR++) {
@@ -1226,7 +1226,7 @@ int calcE_aprox(nifti_image * T1,
     loglik[0]=0;
     SumExpec=0.0f;
     //int * Expec_offset_PTR= (int *) Expec_offset;
-    register SegPrecisionTYPE tempvar=0.0f;
+    SegPrecisionTYPE tempvar=0.0f;
     float mahal=0.0f;
     float logliktmp=0.0f;
     IterPrior_PTR= (SegPrecisionTYPE *) IterPrior;

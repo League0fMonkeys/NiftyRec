@@ -45,7 +45,7 @@ void MRFregularization_mask(const SegPrecisionTYPE * Expec,
 #endif
       for (int iz=1; iz<maxiz-1; iz++) {
           SegPrecisionTYPE Sum_Temp_MRF_Class_Expect;
-          register int currclass;
+          int currclass;
           SegPrecisionTYPE Temp_MRF_Class_Expect[max_numbclass];
           SegPrecisionTYPE Gplane[max_numbclass];
           SegPrecisionTYPE Hplane[max_numbclass];
@@ -145,7 +145,7 @@ void MRFregularization(const SegPrecisionTYPE * Expec,
           cout << "Optimising MRF"<<endl;
           flush(cout);
         }
-      register int currclass;
+      int currclass;
 
       unsigned int numel_currclass_shift[max_numbclass];
       //unsigned int image_size_currclass_shift[max_numbclass];
@@ -241,7 +241,7 @@ void MRFregularization_mask2D(const SegPrecisionTYPE * Expec,
           cout << "Optimising MRF"<<endl;
           flush(cout);
         }
-      register int currclass;
+      int currclass;
 
       unsigned int numelmasked_currclass_shift[max_numbclass];
       for(int i=0; i<numclass; i++){
@@ -332,7 +332,7 @@ void MRFregularization2D(const SegPrecisionTYPE * Expec,
           cout << "Optimising MRF"<<endl;
           flush(cout);
         }
-      register int currclass;
+      int currclass;
 
       unsigned int numel_currclass_shift[max_numbclass];
       for(int i=0; i<numclass; i++){

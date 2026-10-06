@@ -22,6 +22,10 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
    /* Reset GPU */
    int status = et_array_reset_gpu();
 
+   /* Library built without GPU support: there is nothing to reset, not an error. */
+   if (status == niftyrec_error_nogpubuilt)
+       status = 0;
+
    mwSize mw_status_size[1];
    mw_status_size[0] = (mwSize)1;
    plhs[0] =  mxCreateNumericArray(1, mw_status_size, mxINT32_CLASS, mxREAL);

@@ -247,3 +247,40 @@ NSS-MIC 2010.
 ##############################################################################
 
 
+
+## Building with MATLAB (CPU-only, Linux/macOS/Windows)
+
+Requires CMake >= 3.12, a C/C++ compiler, and MATLAB (R2017b or newer).
+
+```
+mkdir build && cd build
+cmake .. -DNiftyRec_USE_CUDA=OFF -DNiftyRec_BUILD_RENDERER=OFF -DNiftyRec_BUILD_MATLAB=ON \
+         -DMatlab_ROOT_DIR=/usr/local/MATLAB/R2024b -DCMAKE_INSTALL_PREFIX=$HOME/NiftyRec_install \
+         -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+make -j8 && make install
+```
+
+Then in MATLAB:
+
+```
+addpath(genpath('<install prefix>/niftyrec/matlab'));
+setenv('LD_LIBRARY_PATH', ['<install prefix>/lib:' getenv('LD_LIBRARY_PATH')]); % Linux; set before starting MATLAB
+et_isinstalled
+```
+
+On Linux, if MATLAB loads its own older libstdc++, start it with
+`LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6 matlab`.
+
+### Apple Silicon (arm64) + MATLAB R2025b
+
+```
+brew install cmake
+mkdir build && cd build
+cmake .. -DNiftyRec_USE_CUDA=OFF -DNiftyRec_BUILD_RENDERER=OFF -DNiftyRec_BUILD_MATLAB=ON \
+         -DMatlab_ROOT_DIR=/Applications/MATLAB_R2025b.app -DCMAKE_OSX_ARCHITECTURES=arm64 \
+         -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_INSTALL_PREFIX=$HOME/NiftyRec_install
+make -j8 && make install
+```
+
+MEX files are produced with the `.mexmaca64` extension. Install RPATHs are set, so no
+`DYLD_LIBRARY_PATH` is needed. In MATLAB: `addpath(genpath(fullfile(getenv('HOME'),'NiftyRec_install','niftyrec','matlab')))`.
