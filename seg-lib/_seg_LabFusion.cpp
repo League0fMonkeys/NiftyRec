@@ -1256,7 +1256,7 @@ int seg_LabFusion::UpdateMRF()
           fprintf(stderr,"* The variable Temp_MRF_Class_Expect was not allocated: OUT OF MEMORY!");
           exit(1);
         }
-      register int currclass;
+      int currclass;
 
 
       indexCentre=0;

@@ -847,8 +847,8 @@ int seg_EM::SetExpec(SegPrecisionTYPE * expec_data)
 {
     if(this->maskImage_status)
     {
-        register int numel=(int)(rowsize(this->Mask)*colsize(this->Mask)*depth(this->Mask));
-        register int numel_masked=0;
+        int numel=(int)(rowsize(this->Mask)*colsize(this->Mask)*depth(this->Mask));
+        int numel_masked=0;
 
         bool * Maskptrtmp = static_cast<bool *> (this->Mask->data);;
 
@@ -869,7 +869,7 @@ int seg_EM::SetExpec(SegPrecisionTYPE * expec_data)
     }
     else
     {
-        register int numel=(int)(rowsize(this->Priors)*colsize(this->Priors)*depth(this->Priors));
+        int numel=(int)(rowsize(this->Priors)*colsize(this->Priors)*depth(this->Priors));
         SegPrecisionTYPE * Expec_PTR= this->Expec;
         SegPrecisionTYPE * DataPTR = (SegPrecisionTYPE *) expec_data;
         for(int cl=0; cl<this->CurrSizes->numclass;cl++)

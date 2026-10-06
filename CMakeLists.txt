@@ -154,9 +154,14 @@ ELSE(NiftyRec_VERBOSE)
         SET(CUDA_VERBOSE_BUILD OFF)
 ENDIF(NiftyRec_VERBOSE)
 
-# Store relative path information in each library. This avoids setting LD_LIBRARY_PATH manually:
-#SET(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
-#SET(CMAKE_INSTALL_RPATH ${CMAKE_INSTALL_PREFIX}/${LIB_INSTALL_DIR})
+# Store relative path information in each library and MEX file, so that installed
+# binaries find each other without setting (DY)LD_LIBRARY_PATH:
+# libraries live in <prefix>/lib, MEX files in <prefix>/niftyrec/matlab (or niftyreg, niftyseg).
+IF(APPLE)
+    SET(CMAKE_INSTALL_RPATH "@loader_path;@loader_path/../../lib")
+ELSEIF(UNIX)
+    SET(CMAKE_INSTALL_RPATH "$ORIGIN;$ORIGIN/../../lib")
+ENDIF()
 
 # Build Teem NRRD libraries:
 IF(NiftyRec_SUPPORT_NRRD)

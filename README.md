@@ -270,3 +270,17 @@ et_isinstalled
 
 On Linux, if MATLAB loads its own older libstdc++, start it with
 `LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6 matlab`.
+
+### Apple Silicon (arm64) + MATLAB R2025b
+
+```
+brew install cmake
+mkdir build && cd build
+cmake .. -DNiftyRec_USE_CUDA=OFF -DNiftyRec_BUILD_RENDERER=OFF -DNiftyRec_BUILD_MATLAB=ON \
+         -DMatlab_ROOT_DIR=/Applications/MATLAB_R2025b.app -DCMAKE_OSX_ARCHITECTURES=arm64 \
+         -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_INSTALL_PREFIX=$HOME/NiftyRec_install
+make -j8 && make install
+```
+
+MEX files are produced with the `.mexmaca64` extension. Install RPATHs are set, so no
+`DYLD_LIBRARY_PATH` is needed. In MATLAB: `addpath(genpath(fullfile(getenv('HOME'),'NiftyRec_install','niftyrec','matlab')))`.
