@@ -227,8 +227,12 @@ SUBDIRS(seg-lib)
 ###############################################################################
 # Build Matlab extensions
 IF(NiftyRec_BUILD_MATLAB)
-        SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMake/matlab")
-        FIND_PACKAGE(MATLAB REQUIRED)
+        # Use CMake's built-in FindMatlab (the bundled FindMATLAB.cmake only knew Windows R2009b).
+        # If MATLAB is not found automatically, pass -DMatlab_ROOT_DIR=/path/to/MATLAB/R20xxx
+        FIND_PACKAGE(Matlab REQUIRED COMPONENTS MX_LIBRARY)
+        SET(MATLAB_INCLUDE_DIRS ${Matlab_INCLUDE_DIRS})
+        SET(MATLAB_MEX_LIBRARY ${Matlab_MEX_LIBRARY})
+        SET(MATLAB_MX_LIBRARY ${Matlab_MX_LIBRARY})
         SUBDIRS(Matlab)
 ENDIF(NiftyRec_BUILD_MATLAB)
 
@@ -293,7 +297,7 @@ IF(NiftyRec_DO_PACKAGE)
         SET(CPACK_PACKAGE_VERSION_MINOR ${Nifty_Rec_VERSION_MINOR})
         SET(CPACK_PACKAGE_VERSION_PATCH ${Nifty_Rec_VERSION_PATCH})
         SET(CPACK_PACKAGE_INSTALL_DIRECTORY "NiftyRec")
-        SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.txt")
+        SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
         SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.txt")
         SET(CPACK_PACKAGE_ICON "${CMAKE_CURRENT_SOURCE_DIR}/images/niftyrec_logo.ico")
         SET(CPACK_NSIS_MUI_ICON "${CMAKE_CURRENT_SOURCE_DIR}/images/niftyrec_logo.ico")
